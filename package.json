@@ -1,7 +1,7 @@
 {
   "name": "xmltree",
   "description": "DOM-driven tools for XML viewing",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "xml",
     "view",
