@@ -1,6 +1,6 @@
-/// <reference path="type_declarations/DefinitelyTyped/virtual-dom/virtual-dom.d.ts" />
-import {VNode} from 'virtual-dom';
-declare module xmltree {
+/// <reference path="../../type_declarations/DefinitelyTyped/virtual-dom/virtual-dom.d.ts" />
+declare module 'xmltree' {
+    import {VNode} from 'virtual-dom';
     class XMLRenderer {
         protected exclude: string[];
         constructor(exclude?: string[]);
@@ -20,6 +20,6 @@ declare module xmltree {
         undefined; otherwise, updates element in place. `element` should not be
         manipulated without also reflecting the changes in `vtree`.
         */
-        update(xml: string, container: Node, element: Element, vtree: VNode): (Element | VNode)[];
+        update(xml: string, container: Node, element: Element, vtree: VNode): [Element, VNode];
     }
 }

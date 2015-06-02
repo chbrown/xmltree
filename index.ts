@@ -70,7 +70,7 @@ export class XMLRenderer {
   undefined; otherwise, updates element in place. `element` should not be
   manipulated without also reflecting the changes in `vtree`.
   */
-  update(xml: string, container: Node, element: Element, vtree: VNode) {
+  update(xml: string, container: Node, element: Element, vtree: VNode): [Element, VNode] {
     var new_vtree = this.render(xml);
     if (vtree === undefined) {
       vtree = new_vtree;
