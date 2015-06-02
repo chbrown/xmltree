@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>xmltree</title>
+  <link href="site.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-app="app">
+  <h1>xmltree demo</h1>
+  <h3>Input</h3>
+  <label>
+    <div><b>Paste unformatted XML here</b></div>
+    <textarea id="input" cols="80" rows="5"></textarea>
+  </label>
+  <h3>Legend</h3>
+  <ul class="xml">
+    <li class="attribute">
+      Attribute
+      <ul class="attribute">
+        <li class="name">Name</li>
+        <li class="value">Value</li>
+      </ul>
+    </li>
+    <li class="start">Start Tag</li>
+    <li class="end">End Tag</li>
+    <li class="text" style="margin: 0">Text</li>
+  </ul>
+  <h3>Output</h3>
+  <div id="output" style="font-size: 9pt"></div>
+</body>
+<script src="build/bundle.js"></script>

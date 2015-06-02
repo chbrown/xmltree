@@ -1,0 +1,22 @@
+.xmltree {
+  font-family: Monaco, "Courier New", monospace;
+}
+.element, .text {
+  /* 2ch is the width of two characters (only makes sense for monospace fonts) */
+  margin-left: 2ch;
+}
+.attribute .name {
+  color: magenta;
+}
+.attribute .value {
+  color: darkmagenta;
+}
+.start {
+  color: green;
+}
+.end {
+  color: red;
+}
+.text {
+  color: blue;
+}
