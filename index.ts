@@ -15,8 +15,7 @@ export class XMLRenderer {
 
   protected renderAttributes(attributes: NamedNodeMap): VNode[] {
     var vnodes: VNode[] = [];
-    var attribute: Attr;
-    for (attribute of attributes) {
+    for (var i = 0, attribute: Attr; (attribute = attributes[i]); i++) {
       if (this.isIncluded(attribute.name)) {
         vnodes.push(this.renderAttribute(attribute));
       }
@@ -35,8 +34,7 @@ export class XMLRenderer {
 
   protected renderNodes(nodes: NodeList): VNode[] {
     var vnodes: VNode[] = [];
-    var node: Node;
-    for (node of nodes) {
+    for (var i = 0, node: Node; (node = nodes[i]); i++) {
       if (node.nodeType === Node.ELEMENT_NODE && this.isIncluded((<Element>node).tagName)) {
         vnodes.push(this.renderNode(node));
       }
