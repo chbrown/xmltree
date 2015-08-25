@@ -9,14 +9,20 @@
     "browser"
   ],
   "homepage": "https://chbrown.github.io/xmltree",
-  "repository": "git://github.com/chbrown/xmltree.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chbrown/xmltree.git"
+  },
   "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
   "license": "MIT",
   "dependencies": {
+    "react": "*",
     "virtual-dom": "*"
   },
   "devDependencies": {
-    "browserify": "*",
-    "typescript": "*"
+    "babel-core": "*",
+    "babel-loader": "*",
+    "typescript": "next",
+    "webpack": "*"
   }
 }
