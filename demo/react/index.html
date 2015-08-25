@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <title>xmltree</title>
-  <link href="site.css" rel="stylesheet" type="text/css">
+  <link href="../site.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="app">
   <h1>xmltree demo</h1>
@@ -11,6 +11,9 @@
     <div><b>Paste unformatted XML here</b></div>
     <textarea id="input" cols="80" rows="5"></textarea>
   </label>
+  <div>
+    <button id="render">Render</button>
+  </div>
   <h3>Legend</h3>
   <ul class="xml">
     <li class="attribute">
@@ -26,5 +29,5 @@
   </ul>
   <h3>Output</h3>
   <div id="output" style="font-size: 9pt"></div>
+  <script src="build/bundle.js"></script>
 </body>
-<script src="build/bundle.js"></script>
