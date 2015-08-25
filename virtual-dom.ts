@@ -35,7 +35,8 @@ export class XMLRenderer {
   protected renderNodes(nodes: NodeList): VNode[] {
     var vnodes: VNode[] = [];
     for (var i = 0, node: Node; (node = nodes[i]); i++) {
-      if (node.nodeType === Node.ELEMENT_NODE && this.isIncluded((<Element>node).tagName)) {
+      var included = (node.nodeType === Node.ELEMENT_NODE) ? this.isIncluded((<Element>node).tagName) : true;
+      if (included) {
         vnodes.push(this.renderNode(node));
       }
     }

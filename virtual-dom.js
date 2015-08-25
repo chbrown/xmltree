@@ -33,7 +33,8 @@ var XMLRenderer = (function () {
     XMLRenderer.prototype.renderNodes = function (nodes) {
         var vnodes = [];
         for (var i = 0, node; (node = nodes[i]); i++) {
-            if (node.nodeType === Node.ELEMENT_NODE && this.isIncluded(node.tagName)) {
+            var included = (node.nodeType === Node.ELEMENT_NODE) ? this.isIncluded(node.tagName) : true;
+            if (included) {
                 vnodes.push(this.renderNode(node));
             }
         }
