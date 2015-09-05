@@ -1,5 +1,5 @@
 /// <reference path="../../type_declarations/DefinitelyTyped/virtual-dom/virtual-dom.d.ts" />
-declare module 'xmltree' {
+declare module 'xmltree/virtual-dom' {
     import {VNode} from 'virtual-dom';
     class XMLRenderer {
         protected exclude: string[];
