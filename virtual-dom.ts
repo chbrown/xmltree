@@ -1,4 +1,3 @@
-/// <reference path="type_declarations/DefinitelyTyped/virtual-dom/virtual-dom.d.ts" />
 import {VNode, VChild, h, create, diff, patch} from 'virtual-dom';
 
 export class XMLRenderer {

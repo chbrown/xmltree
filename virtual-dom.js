@@ -1,4 +1,3 @@
-/// <reference path="type_declarations/DefinitelyTyped/virtual-dom/virtual-dom.d.ts" />
 var virtual_dom_1 = require('virtual-dom');
 var XMLRenderer = (function () {
     function XMLRenderer(exclude) {

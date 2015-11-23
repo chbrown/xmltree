@@ -1,7 +1,6 @@
-/// <reference path="type_declarations/DefinitelyTyped/react/react.d.ts" />
-import React = require('react');
+import * as React from 'react';
 
-interface XMLTreeProps {
+export interface XMLTreeProps {
   xml: string;
   exclude?: string[];
 }

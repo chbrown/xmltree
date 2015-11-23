@@ -3,7 +3,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-/// <reference path="type_declarations/DefinitelyTyped/react/react.d.ts" />
 var React = require('react');
 var XMLTree = (function (_super) {
     __extends(XMLTree, _super);
@@ -32,7 +31,7 @@ var XMLTree = (function (_super) {
         return elements;
     };
     XMLTree.prototype.renderAttribute = function (attribute) {
-        return (React.createElement("span", {"className": "attribute"}, ' ', React.createElement("span", {"className": "name"}, attribute.name), '=', React.createElement("span", {"className": "value"}, '"', attribute.value, '"')));
+        return (React.createElement("span", {className: "attribute"}, ' ', React.createElement("span", {className: "name"}, attribute.name), '=', React.createElement("span", {className: "value"}, '"', attribute.value, '"')));
     };
     XMLTree.prototype.renderNodes = function (nodes) {
         var children = [];
@@ -47,13 +46,13 @@ var XMLTree = (function (_super) {
     XMLTree.prototype.renderNode = function (node) {
         if (node.nodeType == Node.TEXT_NODE) {
             var text = node;
-            return React.createElement("div", {"className": "text"}, text.data);
+            return React.createElement("div", {className: "text"}, text.data);
         }
         else if (node.nodeType == Node.ELEMENT_NODE) {
             var element = node;
             var tagName = element.tagName;
             var startTagElements = ['<', tagName].concat(this.renderAttributes(element.attributes), ['>']);
-            return (React.createElement("div", {"className": "element"}, React.createElement("span", {"className": "start"}, startTagElements), this.renderNodes(node.childNodes), React.createElement("span", {"className": "end"}, '</', tagName, '>')));
+            return (React.createElement("div", {className: "element"}, React.createElement("span", {className: "start"}, startTagElements), this.renderNodes(node.childNodes), React.createElement("span", {className: "end"}, '</', tagName, '>')));
         }
         else {
             return React.createElement("span", null, "(Ignoring node type = ", node.nodeType, ")");
@@ -61,7 +60,7 @@ var XMLTree = (function (_super) {
     };
     XMLTree.prototype.render = function () {
         var children = this.renderNodes(this.state.document.childNodes);
-        return React.createElement("div", {"className": "xmltree"}, children);
+        return React.createElement("div", {className: "xmltree"}, children);
     };
     return XMLTree;
 })(React.Component);

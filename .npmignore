@@ -1,3 +1,7 @@
 demo/
+Makefile
 react.tsx
+react.d.ts
+tsconfig.json
 virtual-dom.ts
+virtual-dom.d.ts
