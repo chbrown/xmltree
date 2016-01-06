@@ -18,7 +18,8 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "virtual-dom": "*"
+    "virtual-dom": "*",
+    "tarry": "*"
   },
   "devDependencies": {
     "babel-core": "^5.0.0",
