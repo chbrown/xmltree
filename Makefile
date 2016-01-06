@@ -11,10 +11,10 @@ $(BIN)/webpack $(BIN)/tsc:
 %.js: %.tsx $(BIN)/tsc
 	$(BIN)/tsc -d
 
-demo/react/build/bundle.js: demo/react/webpack.config.js demo/react/app.jsx $(BIN)/webpack
+demo/react/build/bundle.js: demo/react/webpack.config.js demo/react/app.jsx react.js $(BIN)/webpack
 	mkdir -p $(@D)
 	NODE_ENV=production $(BIN)/webpack --config $<
 
-demo/virtual-dom/build/bundle.js: demo/virtual-dom/webpack.config.js demo/virtual-dom/app.js $(BIN)/webpack
+demo/virtual-dom/build/bundle.js: demo/virtual-dom/webpack.config.js demo/virtual-dom/app.js virtual-dom.js $(BIN)/webpack
 	mkdir -p $(@D)
 	NODE_ENV=production $(BIN)/webpack --config $<
