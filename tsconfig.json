@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "module": "commonjs",
-    "target": "ES5",
-    "jsx": "react"
+    "target": "ES5"
   },
   "files": [
     "node_modules/declarations/react/react.d.ts",
+    "node_modules/declarations/react/react-dom.d.ts",
     "node_modules/declarations/virtual-dom/virtual-dom.d.ts",
     "react.tsx",
     "virtual-dom.ts"
