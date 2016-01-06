@@ -1,3 +1,4 @@
+"use strict";
 var virtual_dom_1 = require('virtual-dom');
 var XMLRenderer = (function () {
     function XMLRenderer(exclude) {
@@ -80,5 +81,5 @@ var XMLRenderer = (function () {
         return [element, vtree];
     };
     return XMLRenderer;
-})();
+}());
 exports.XMLRenderer = XMLRenderer;
