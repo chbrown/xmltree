@@ -18,14 +18,19 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "virtual-dom": "*",
-    "tarry": "*"
+    "tarry": "*",
+    "virtual-dom": "*"
   },
   "devDependencies": {
-    "babel-core": "^5.0.0",
-    "babel-loader": "^5.0.0",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-preset-react": "*",
+    "babel-preset-es2015": "*",
     "declarations": "*",
-    "typescript": "next",
+    "typescript": "*",
     "webpack": "*"
+  },
+  "babel": {
+    "presets": ["react", "es2015"]
   }
 }
