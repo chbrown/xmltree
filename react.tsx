@@ -1,12 +1,25 @@
 import * as React from 'react';
 import {toArray} from 'tarry';
 
+function isText(node: Node): node is Text {
+  return node.nodeType === Node.TEXT_NODE;
+}
+function isElement(node: Node): node is Element {
+  return node.nodeType === Node.ELEMENT_NODE;
+}
+function isAttr(node: Node): node is Attr {
+  return node.nodeType === Node.ATTRIBUTE_NODE;
+}
+function isCDATASection(node: Node): node is CDATASection {
+  return node.nodeType === Node.CDATA_SECTION_NODE;
+}
+
 function isIncluded(node: Node, exclude: string[]): boolean {
-  if (node.nodeType == Node.ELEMENT_NODE) {
-    return exclude.indexOf((node as Element).tagName) === -1;
+  if (isElement(node)) {
+    return exclude.indexOf(node.tagName) === -1;
   }
-  if (node.nodeType == Node.ATTRIBUTE_NODE) {
-    return exclude.indexOf((node as Attr).name) === -1;
+  if (isAttr(node)) {
+    return exclude.indexOf(node.name) === -1;
   }
   return true;
 }
@@ -17,18 +30,16 @@ const XMLTreeAttribute = ({name, value}: {name: string, value: string}) => (
   </span>
 );
 const XMLTreeNode = ({node, exclude}: {node: Node, exclude: string[]}) => {
-  if (node.nodeType == Node.TEXT_NODE) {
-    var text = node as Text;
-    return <div className="text">{text.data}</div>;
+  if (isText(node)) {
+    return <div className="text">{node.data}</div>;
   }
-  else if (node.nodeType == Node.ELEMENT_NODE) {
-    var element = node as Element;
-    var tagName = element.tagName;
+  else if (isElement(node)) {
+    var tagName = node.tagName;
     return (
       <div className="element">
         <span className="start">
           {'<'}{tagName}
-          {toArray(element.attributes).filter(node => isIncluded(node, exclude)).map(({name, value}, i) =>
+          {toArray(node.attributes).filter(attr => isIncluded(attr, exclude)).map(({name, value}, i) =>
             <XMLTreeAttribute key={i} name={name} value={value} />
           )}
           {'>'}
@@ -38,9 +49,8 @@ const XMLTreeNode = ({node, exclude}: {node: Node, exclude: string[]}) => {
       </div>
     );
   }
-  else if (node.nodeType == Node.CDATA_SECTION_NODE) {
-    let cdata = node as CDATASection;
-    return <div className="cdata">{'<![CDATA['}{cdata.data}{']]>'}</div>;
+  else if (isCDATASection(node)) {
+    return <div className="cdata">{'<![CDATA['}{node.data}{']]>'}</div>;
   }
   else {
     return <span>(Ignoring node type = {node.nodeType})</span>;
@@ -56,7 +66,11 @@ export interface XMLTreeProps {
   xml: string;
   exclude?: string[];
 }
-export class XMLTree extends React.Component<XMLTreeProps, {document: Document, exclude: string[]}> {
+export interface XMLTreeState {
+  document: Document;
+  exclude: string[];
+}
+export class XMLTree extends React.Component<XMLTreeProps, XMLTreeState> {
   constructor(props) {
     super(props);
     this.state = {
