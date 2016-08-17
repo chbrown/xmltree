@@ -6,11 +6,23 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var React = require('react');
 var tarry_1 = require('tarry');
+function isText(node) {
+    return node.nodeType === Node.TEXT_NODE;
+}
+function isElement(node) {
+    return node.nodeType === Node.ELEMENT_NODE;
+}
+function isAttr(node) {
+    return node.nodeType === Node.ATTRIBUTE_NODE;
+}
+function isCDATASection(node) {
+    return node.nodeType === Node.CDATA_SECTION_NODE;
+}
 function isIncluded(node, exclude) {
-    if (node.nodeType == Node.ELEMENT_NODE) {
+    if (isElement(node)) {
         return exclude.indexOf(node.tagName) === -1;
     }
-    if (node.nodeType == Node.ATTRIBUTE_NODE) {
+    if (isAttr(node)) {
         return exclude.indexOf(node.name) === -1;
     }
     return true;
@@ -21,21 +33,18 @@ var XMLTreeAttribute = function (_a) {
 };
 var XMLTreeNode = function (_a) {
     var node = _a.node, exclude = _a.exclude;
-    if (node.nodeType == Node.TEXT_NODE) {
-        var text = node;
-        return React.createElement("div", {className: "text"}, text.data);
+    if (isText(node)) {
+        return React.createElement("div", {className: "text"}, node.data);
     }
-    else if (node.nodeType == Node.ELEMENT_NODE) {
-        var element = node;
-        var tagName = element.tagName;
-        return (React.createElement("div", {className: "element"}, React.createElement("span", {className: "start"}, '<', tagName, tarry_1.toArray(element.attributes).filter(function (node) { return isIncluded(node, exclude); }).map(function (_a, i) {
+    else if (isElement(node)) {
+        var tagName = node.tagName;
+        return (React.createElement("div", {className: "element"}, React.createElement("span", {className: "start"}, '<', tagName, tarry_1.toArray(node.attributes).filter(function (attr) { return isIncluded(attr, exclude); }).map(function (_a, i) {
             var name = _a.name, value = _a.value;
             return React.createElement(XMLTreeAttribute, {key: i, name: name, value: value});
         }), '>'), React.createElement(XMLTreeContainer, {nodes: node.childNodes, exclude: exclude}), React.createElement("span", {className: "end"}, '</', tagName, '>')));
     }
-    else if (node.nodeType == Node.CDATA_SECTION_NODE) {
-        var cdata = node;
-        return React.createElement("div", {className: "cdata"}, '<![CDATA[', cdata.data, ']]>');
+    else if (isCDATASection(node)) {
+        return React.createElement("div", {className: "cdata"}, '<![CDATA[', node.data, ']]>');
     }
     else {
         return React.createElement("span", null, "(Ignoring node type = ", node.nodeType, ")");
