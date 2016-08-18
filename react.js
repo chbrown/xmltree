@@ -51,8 +51,8 @@ var XMLTreeNode = function (_a) {
     }
 };
 var XMLTreeContainer = function (_a) {
-    var nodes = _a.nodes, _b = _a.exclude, exclude = _b === void 0 ? [] : _b;
-    return (React.createElement("span", null, tarry_1.toArray(nodes).filter(function (node) { return isIncluded(node, exclude); }).map(function (node, i) {
+    var nodes = _a.nodes, _b = _a.exclude, exclude = _b === void 0 ? [] : _b, _c = _a.className, className = _c === void 0 ? '' : _c;
+    return (React.createElement("span", {className: className}, tarry_1.toArray(nodes).filter(function (node) { return isIncluded(node, exclude); }).map(function (node, i) {
         return React.createElement(XMLTreeNode, {key: i, node: node, exclude: exclude});
     })));
 };
@@ -66,7 +66,9 @@ var XMLTree = (function (_super) {
         };
     }
     XMLTree.prototype.render = function () {
-        return React.createElement(XMLTreeContainer, {nodes: this.state.document.childNodes, exclude: this.state.exclude});
+        var className = this.props.className;
+        var _a = this.state, document = _a.document, exclude = _a.exclude;
+        return React.createElement(XMLTreeContainer, {className: className, nodes: document.childNodes, exclude: exclude});
     };
     return XMLTree;
 }(React.Component));

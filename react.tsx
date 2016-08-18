@@ -29,6 +29,7 @@ const XMLTreeAttribute = ({name, value}: {name: string, value: string}) => (
     <span className="name">{name}</span>{'='}<span className="value">{'"'}{value}{'"'}</span>
   </span>
 );
+
 const XMLTreeNode = ({node, exclude}: {node: Node, exclude: string[]}) => {
   if (isText(node)) {
     return <div className="text">{node.data}</div>;
@@ -56,8 +57,14 @@ const XMLTreeNode = ({node, exclude}: {node: Node, exclude: string[]}) => {
     return <span>(Ignoring node type = {node.nodeType})</span>;
   }
 };
-const XMLTreeContainer = ({nodes, exclude = []}: {nodes: NodeList, exclude: string[]}) => (
-  <span>{toArray(nodes).filter(node => isIncluded(node, exclude)).map((node, i) =>
+
+interface XMLTreeContainerProps {
+  nodes: NodeList;
+  exclude: string[];
+  className?: string;
+}
+const XMLTreeContainer = ({nodes, exclude = [], className = ''}: XMLTreeContainerProps) => (
+  <span className={className}>{toArray(nodes).filter(node => isIncluded(node, exclude)).map((node, i) =>
     <XMLTreeNode key={i} node={node} exclude={exclude} />
   )}</span>
 );
@@ -65,6 +72,7 @@ const XMLTreeContainer = ({nodes, exclude = []}: {nodes: NodeList, exclude: stri
 export interface XMLTreeProps {
   xml: string;
   exclude?: string[];
+  className?: string;
 }
 export interface XMLTreeState {
   document: Document;
@@ -79,6 +87,8 @@ export class XMLTree extends React.Component<XMLTreeProps, XMLTreeState> {
     };
   }
   render() {
-    return <XMLTreeContainer nodes={this.state.document.childNodes} exclude={this.state.exclude} />;
+    const {className} = this.props;
+    const {document, exclude} = this.state;
+    return <XMLTreeContainer className={className} nodes={document.childNodes} exclude={exclude} />;
   }
 }
