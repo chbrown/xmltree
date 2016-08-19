@@ -18,7 +18,6 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "tarry": "*",
     "virtual-dom": "*"
   },
   "devDependencies": {

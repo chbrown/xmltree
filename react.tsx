@@ -1,5 +1,14 @@
 import * as React from 'react';
-import {toArray} from 'tarry';
+
+/*! from tarry (https://github.com/chbrown/tarry) */
+function toArray<T>(iterable: {[index: number]: T, length: number}) {
+  var length = iterable.length;
+  var array: T[] = new Array(length);
+  for (var i = 0; i < length; i++) {
+    array[i] = iterable[i];
+  }
+  return array;
+}
 
 function isText(node: Node): node is Text {
   return node.nodeType === Node.TEXT_NODE;
