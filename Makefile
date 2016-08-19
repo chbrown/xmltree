@@ -1,7 +1,8 @@
-BIN = node_modules/.bin
-TYPESCRIPT = $(shell jq -r '.files[]' tsconfig.json | grep -Fv .d.ts)
-TYPESCRIPT_BASENAMES = $(basename $(TYPESCRIPT))
-DEMO_BUNDLES = demo/react/build/bundle.js demo/virtual-dom/build/bundle.js
+BIN := node_modules/.bin
+TYPESCRIPT := $(shell jq -r '.files[]' tsconfig.json | grep -Fv .d.ts)
+TYPESCRIPT_BASENAMES := $(basename $(TYPESCRIPT))
+JAVASCRIPT := $(TYPESCRIPT_BASENAMES:%=%.js)
+DEMO_BUNDLES := demo/react/build/bundle.js demo/virtual-dom/build/bundle.js
 
 all: $(TYPESCRIPT_BASENAMES:%=%.js) .npmignore .gitignore $(DEMO_BUNDLES)
 
@@ -12,7 +13,7 @@ $(BIN)/webpack $(BIN)/tsc:
 	echo demo/ Makefile tsconfig.json $(TYPESCRIPT) | tr ' ' '\n' > $@
 
 .gitignore: tsconfig.json
-	echo $(TYPESCRIPT_BASENAMES:%=%.d.ts) | tr ' ' '\n' > $@
+	echo $(JAVASCRIPT) $(TYPESCRIPT_BASENAMES:%=%.d.ts) | tr ' ' '\n' > $@
 
 %.js: %.ts $(BIN)/tsc
 	$(BIN)/tsc -d
